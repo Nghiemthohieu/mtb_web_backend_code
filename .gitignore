@@ -1,0 +1,23 @@
+# Bỏ các file nhị phân đã build
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Thư mục build/output
+bin/
+build/
+
+# Các tệp hệ điều hành
+.DS_Store
+Thumbs.db
+
+# Các tệp và thư mục IDE/editor
+.vscode/
+.idea/
+*.swp
+# .gitignore
+node_modules
+.env
+sjkdhf.txt

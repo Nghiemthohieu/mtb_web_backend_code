@@ -1,0 +1,38 @@
+[2025-05-14 08:59:23] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-14 08:59:24] INFO: Connect MongoDB Success
+[2025-05-14 10:58:26] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-14 10:58:27] INFO: Connect MongoDB Success
+[2025-05-14 11:06:08] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-14 11:06:09] INFO: Connect MongoDB Success
+[2025-05-14 11:07:33] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-14 11:07:33] INFO: Connect MongoDB Success
+[2025-05-14 11:09:32] INFO: Request Log
+[2025-05-14 11:13:42] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-14 11:13:43] INFO: Connect MongoDB Success
+[2025-05-14 11:13:45] INFO: Request Log | path: /v1/api/admin/product_style/create | method: GET | status: 404 | duration: 7.65 ms
+[2025-05-14 11:14:14] INFO: Request Log | path: /v1/api/admin/product_style/create | method: POST | status: 500 | duration: 3.15 ms
+[2025-05-14 11:16:44] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-14 11:16:45] INFO: Connect MongoDB Success
+[2025-05-14 11:16:47] INFO: Request Log | path: /v1/api/admin/product_style/create | method: POST | status: 500 | duration: 71.32 ms
+[2025-05-14 11:18:52] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-14 11:18:52] INFO: Connect MongoDB Success
+[2025-05-14 11:18:55] INFO: Request Log | path: /v1/api/admin/product_style/create | method: POST | status: 500 | duration: 46.47 ms
+[2025-05-14 11:22:45] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-14 11:22:46] INFO: Connect MongoDB Success
+[2025-05-14 11:22:49] INFO: Request Log | path: /v1/api/admin/product_style/create | method: POST | status: 200 | duration: 67.11 ms
+[2025-05-14 11:24:28] INFO: Request Log | path: /v1/api/admin/product_style/list | method: GET | status: 200 | duration: 82.16 ms
+[2025-05-14 11:25:16] INFO: Request Log | path: /v1/api/admin/product_style/detail/68241a996954b36ad1dde83d | method: GET | status: 200 | duration: 34.80 ms
+[2025-05-14 11:26:28] INFO: Request Log | path: /v1/api/admin/product_style/update | method: PUT | status: 200 | duration: 51.31 ms
+[2025-05-14 11:28:52] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-14 11:28:53] INFO: Connect MongoDB Success
+[2025-05-14 11:28:57] INFO: Request Log | path: /v1/api/admin/product_style/update | method: PUT | status: 500 | duration: 3.06 ms
+[2025-05-14 11:29:56] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-14 11:29:57] INFO: Connect MongoDB Success
+[2025-05-14 11:30:00] ERROR: Vui lòng điển _id của size
+[2025-05-14 11:30:00] INFO: Request Log | path: /v1/api/admin/product_style/update | method: PUT | status: 500 | duration: 7.16 ms
+[2025-05-14 11:31:21] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-14 11:31:22] INFO: Connect MongoDB Success
+[2025-05-14 11:31:28] ERROR: Vui lòng điển _id của size
+[2025-05-14 11:31:28] INFO: Request Log | path: /v1/api/admin/product_style/update | method: PUT | status: 404 | duration: 5.34 ms
+[2025-05-14 11:32:29] INFO: Request Log | path: /v1/api/admin/product_style/list | method: GET | status: 200 | duration: 85.60 ms
+[2025-05-14 11:32:42] INFO: Request Log | path: /v1/api/admin/product_style/update | method: PUT | status: 200 | duration: 50.86 ms
