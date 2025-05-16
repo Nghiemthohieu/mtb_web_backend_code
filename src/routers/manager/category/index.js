@@ -8,7 +8,7 @@ const router = express.Router();
 
 // router.use(authentication);
 router.post('/create', asyncHandler(CategoryController.CreateCategory))
-router.get('/detail/:id', asyncHandler(CategoryController.G))
+router.get('/detail/:id', asyncHandler(CategoryController.GetByCategoryId))
 router.get('/list', asyncHandler(CategoryController.GetAllCategory))
 router.put('/update', asyncHandler(CategoryController.UpdateCategory))
 router.delete('/delete/:id', asyncHandler(CategoryController.DeleteCategory))

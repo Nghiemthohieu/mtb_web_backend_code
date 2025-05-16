@@ -33,7 +33,7 @@ const ProductSchema = new Schema({
     alt_text: { type: String },
     color: { type: Schema.Types.ObjectId, ref: 'ProductColor' },
     is_main: { type: Boolean, default: false },
-    img_hover: { type: Boolean, default: false },
+    img_hover: { type: String },
     alt_text_hover: { type: String },
   }]
 }, {

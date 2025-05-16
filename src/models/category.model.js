@@ -41,6 +41,10 @@ const categorySchema = new Schema({
     type: Boolean,
     default: false,
   },
+  sort_order: {
+    type: Number,
+    default: 0,
+  },
 
   // Many-to-Many: products <-> categories
   products: [

@@ -8,6 +8,7 @@
 # Thư mục build/output
 bin/
 build/
+logs/
 
 # Các tệp hệ điều hành
 .DS_Store
@@ -21,3 +22,6 @@ Thumbs.db
 node_modules
 .env
 sjkdhf.txt
+# Các tệp log
+yarn.lock
+combique.log
