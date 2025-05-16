@@ -19,9 +19,11 @@ const categorySchema = new Schema({
     required: true,
     trim: true,
   },
-  img: {
+  img_home: {
     type: String,
-    required: true,
+  },
+  img_collection: {
+    type: String,
   },
   name_navbar: {
     type: String,

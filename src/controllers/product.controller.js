@@ -42,6 +42,18 @@ class ProductController {
             data: await ProductService.getProductByMaterial(req.query)
         }).send(res);
     }
+    static CreateProductImage = async (req, res) => {
+        const productId = req.params.id;
+        const files = req.files;
+        const metaData = JSON.parse(req.body.data); // req.body.data là JSON string
+
+        const result = await ProductService.UpdateProductImages(productId, files, metaData);
+
+        new SuccessResponse({
+            message: 'Upload ảnh thành công',
+            data: result
+        }).send(res);
+    };
 }
 
 module.exports = ProductController;

@@ -6,9 +6,6 @@ const mongoose = require('mongoose');
 const productColorSchema = new mongoose.Schema({
     color: {
         type: String,
-        required: true,
-        unique: true,
-        trim: true,
     },
     colorImage: {
         type: String,
