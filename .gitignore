@@ -22,3 +22,6 @@ Thumbs.db
 node_modules
 .env
 sjkdhf.txt
+# Các tệp log
+yarn.lock
+combique.log
