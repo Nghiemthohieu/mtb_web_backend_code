@@ -46,10 +46,10 @@ class CategoryController {
         }).send(res);
     };
 
-    static GetAllCategory = async(req, res) => {
+    static GetNavbarCategory = async(req, res) => {
         return new SuccessResponse({
             message: 'Get All Category success',
-            data: await CategoryService.GetAllCategory(req.query)
+            data: await CategoryService.GetNavbarCategory()
         }).send(res);
     };
 }
