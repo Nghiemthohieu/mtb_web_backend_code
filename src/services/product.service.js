@@ -1,6 +1,6 @@
 'use strict';
 
-const { BadRequestError } = require("../core/error.response");
+const { BadRequestError, notFoundError } = require("../core/error.response");
 const { populate } = require("../models/category.model");
 const productModel = require("../models/product.model");
 const { decodeBase64Image } = require("../utils/base64");
@@ -72,7 +72,10 @@ class ProductService {
 
     static UpdateProductImages = async (productId, files, metaData) => {
         const product = await productModel.findById(productId);
-        if (!product) throw new NotFoundError("Không tìm thấy sản phẩm");
+        if (!product) {
+            logger.error("Không tìm thayas sản phẩm");
+            throw new notFoundError("Không tìm thấy sản phẩm");
+        };
 
         const images = files['images'] || [];
         const hoverImages = files['hoverImages'] || [];
