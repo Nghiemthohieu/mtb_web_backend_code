@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const Paging = require('./paging');
+const Paging = require("./paging");
 
 /**
  * Hàm phân trang tái sử dụng cho bất kỳ model Mongoose nào
@@ -9,7 +9,7 @@ const Paging = require('./paging');
  * @param {Object} options - { page, limit, sort, populate }
  */
 const paginate = async (model, query = {}, options = {}) => {
-  const { page = 1, limit = 10, sort = null, populate = '' } = options;
+  const { page = 1, limit = 10, sort = null, populate = "" } = options;
   const paging = new Paging(page, limit);
 
   const total = await model.countDocuments(query);
@@ -24,7 +24,7 @@ const paginate = async (model, query = {}, options = {}) => {
 
   return {
     data,
-    paging: paging.toObject()
+    paging: paging.toObject(),
   };
 };
 
