@@ -9,20 +9,30 @@ app.use(morgan('dev'));
 app.use(helmet());
 app.use(compression());
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 require('./dbs/init.mongodb');
 const awsService = require('./dbs/init.awss3');
 awsService.init(); // Gọi init để khởi tạo S3 Client
 
-// const {checkOverload} = require('./helpers/check.connect');
-// checkOverload()
+const {checkOverload} = require('./helpers/check.connect');
+checkOverload()
 const RequestLogger = require('./middlewares/logger.middeware');
+const { updateProductRatings } = require('./services/product_review.service');
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+// Cập nhật mỗi 10 phút
+setInterval(() => {
+    updateProductRatings()
+        .then(() => console.log('✅ Cập nhật rating thành công'))
+        .catch(err => console.error('❌ Lỗi cập nhật rating:', err));
+}, 10 * 60 * 1000); // 10 phút = 600000 ms
+
 app.use(RequestLogger.logMiddleware());
 
 app.use('', require('./routers'));
 
-app.use((req, res, next)=> {
+app.use((req, res, next) => {
     const error = new Error('Not Found');
     error.status = 404;
     next(error);

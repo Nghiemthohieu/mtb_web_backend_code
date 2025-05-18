@@ -2,8 +2,8 @@
 
 const mongoose = require('mongoose');
 
-const DOCUMENT_NAME = 'User';
-const COLLECTION_NAME = 'db_users';
+const DOCUMENT_NAME = 'Manager';
+const COLLECTION_NAME = 'db_managers';
 
 const accessUserSchema = new mongoose.Schema({
     name: {

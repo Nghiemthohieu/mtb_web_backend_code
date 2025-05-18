@@ -5,6 +5,7 @@ const asyncHandler = require('../helpers/asyncHandler');
 const KeyTokenService = require('../services/KeyToken.service');
 const { authFailureError, notFoundError, ErrorResponse } = require('../core/error.response');
 const { log } = require('winston');
+const { v4: uuidv4 } = require('uuid');
 const logger = require('../utils/logger');
 
 // Cải thiện HEADER
@@ -45,23 +46,36 @@ const createTokenPair = async (payload, publicKey, privateKey) => {
 };
 
 // Middleware xác thực
-const authentication = asyncHandler(async (req, res, next) => {
+const authenticationUser = asyncHandler(async (req, res, next) => {
     const userId = req.headers[HEADER.CLIENT_ID];
-    
+    console.log('session_id', req.cookies.session_id);
+
     if (!userId) {
-        logger.error('Authentication Failure');
-        throw new authFailureError('Authentication Failure');
+        let session_id = req.cookies.session_id;
+
+        if (!session_id) {
+            session_id = uuidv4();
+            res.cookie('session_id', session_id, {
+                maxAge: 7 * 24 * 60 * 60 * 1000, // 7 ngày
+                httpOnly: true,
+            });
+        }
+
+        req.sessionId = session_id;
+        req.cartKey = `cart:session:${session_id}`;
+
+        return next();
     }
 
     const keyToken = await KeyTokenService.findByUserId(userId);
-    
+
     if (!keyToken) {
         logger.error('Not found keyToken');
         throw new notFoundError('Not found keyToken');
     }
 
     const authHeader = req.headers[HEADER.AUTHORIZATION];
-    
+
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
         logger.error('Authentication Failure');
         throw new authFailureError('Authentication Failure');
@@ -70,8 +84,49 @@ const authentication = asyncHandler(async (req, res, next) => {
     const accessToken = authHeader.split(' ')[1];
     try {
         const decoded = JWT.verify(accessToken, keyToken.publicKey);
-        
+
         if (userId !== decoded.userId) {
+            logger.error('Invalid UserId');
+            throw new authFailureError('Invalid UserId');
+        }
+
+        req.keyStore = keyToken;
+        req.user = decoded;  // Optional: Attach user data to request for further use
+        req.cartKey = `cart:user:${req.user.userId}`;
+        next();
+    } catch (error) {
+        logger.error('Invalid access token');
+        throw new authFailureError('Invalid access token');
+    }
+});
+
+const authenticationManager = asyncHandler(async (req, res, next) => {
+    const managerId = req.headers[HEADER.CLIENT_ID];
+
+    if (!managerId) {
+        logger.error('Authentication Failure');
+        throw new authFailureError('Authentication Failure');
+    }
+
+    const keyToken = await KeyTokenService.findByUserId(managerId);
+
+    if (!keyToken) {
+        logger.error('Not found keyToken');
+        throw new notFoundError('Not found keyToken');
+    }
+
+    const authHeader = req.headers[HEADER.AUTHORIZATION];
+
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        logger.error('Authentication Failure');
+        throw new authFailureError('Authentication Failure');
+    }
+
+    const accessToken = authHeader.split(' ')[1];
+    try {
+        const decoded = JWT.verify(accessToken, keyToken.publicKey);
+
+        if (managerId !== decoded.userId) {
             logger.error('Invalid UserId');
             throw new authFailureError('Invalid UserId');
         }
@@ -97,6 +152,6 @@ const verifyJWT = async (token, keySecret) => {
 
 module.exports = {
     createTokenPair,
-    authentication,
+    authenticationUser,
     verifyJWT
 };

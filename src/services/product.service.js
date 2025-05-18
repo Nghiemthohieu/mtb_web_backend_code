@@ -3,10 +3,11 @@
 const { BadRequestError, notFoundError } = require("../core/error.response");
 const { populate } = require("../models/category.model");
 const productModel = require("../models/product.model");
-const { decodeBase64Image } = require("../utils/base64");
 const logger = require("../utils/logger");
+const omitUndefined = require("../utils/omitUndefinedUtils");
 const paginate = require("../utils/paginate");
 const { uploadFileToS3 } = require("../utils/uploadFileToS3");
+const CategoryService = require("./category.service");
 
 class ProductService {
     static CreateProduct = async (data) => {
@@ -107,13 +108,13 @@ class ProductService {
         product.product_images = [...product.product_images, ...productImages];
         await product.save();
 
-        return product;
+        return { data: product };
     };
 
-    static productCollection = async (query) => {
+    static productCollection = async (query, categorySlug) => {
         const {
-            page = 1,
-            limit = 10,
+            page,
+            limit,
             size,
             color,
             product_material,
@@ -121,11 +122,14 @@ class ProductService {
             sort,
         } = query;
 
+        const categoryIds = await CategoryService.getAllChildCategoryIds(categorySlug);
+
         const filter = omitUndefined({
             size,
             color,
             product_material,
             product_style,
+            ...(categoryIds.length ? { categories: { $in: categoryIds } } : {}),
         });
 
         const sortOptions = {

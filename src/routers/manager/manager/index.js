@@ -3,10 +3,10 @@
 const express = require('express');
 const { asyncHandler } = require('../../../auth/checkAuth');
 const { authentication } = require('../../../auth/authUtils');
-const ProductController = require('../../../controllers/product.controller');
+const ManagerController = require('../../../controllers/manager.controller');
 const router = express.Router();
 
 // router.use(authentication);
-router.get('/list_style', asyncHandler(ProductController.getProductByStyle))
+router.post('/create', asyncHandler(ManagerController.createManager))
 
 module.exports = router;

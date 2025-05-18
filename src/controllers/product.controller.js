@@ -36,10 +36,10 @@ class ProductController {
             data: await ProductService.deleteProduct(req.params.id)
         }).send(res);
     }
-    static getProductByMaterial = async (req, res, next) => {
+    static getProductByStyle = async (req, res, next) => {
         new SuccessResponse({
             message: 'Get product by material success',
-            data: await ProductService.getProductByMaterial(req.query)
+            data: await ProductService.getProductByStyle(req.query)
         }).send(res);
     }
     static CreateProductImage = async (req, res) => {
@@ -57,7 +57,7 @@ class ProductController {
     static productCollection = async (req, res) => {
         new SuccessResponse({
             message: "Get product collection success",
-            data: await ProductService.productCollection(req.query),
+            data: await ProductService.productCollection(req.query, req.params.slug),
         }).send(res);
     };
 }

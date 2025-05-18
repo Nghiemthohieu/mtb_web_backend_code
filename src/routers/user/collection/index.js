@@ -6,6 +6,6 @@ const productCollectionController = require("../../../controllers/product.contro
 
 const router = express.Router();
 
-router.post("", asyncHandler(productCollectionController.productCollection));
+router.post("/:slug", asyncHandler(productCollectionController.productCollection));
 
 module.exports = router;
