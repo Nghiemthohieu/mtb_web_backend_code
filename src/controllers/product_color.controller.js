@@ -13,9 +13,12 @@ class ProductColorController {
     }
 
     static UpdateProductColor = async (req, res, next) => {
+        const colorId = req.params.id;
+        const files = req.files;
+        const metaData = JSON.parse(req.body.data);
         return new SuccessResponse({
             message: 'Update Product Color success',
-            data: await ProductColorService.UpdateProductColor(req.body)
+            data: await ProductColorService.UpdateProductColor(colorId, files, metaData)
         }).send(res);
     }
 
@@ -34,9 +37,10 @@ class ProductColorController {
     }
 
     static CreateProductColor = async (req, res, next) => {
+        const metaData = JSON.parse(req.body.data);
         return new SuccessResponse({
             message: 'Create Product Color success',
-            data: await ProductColorService.createProductColor(req.body)
+            data: await ProductColorService.createProductColor(req.files, metaData)
         }).send(res);
     }
 }
