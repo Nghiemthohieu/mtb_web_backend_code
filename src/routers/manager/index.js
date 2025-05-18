@@ -9,6 +9,5 @@ router.use("/product_materials", require("./product_materials"));
 router.use("/product_style", require("./product_style"));
 router.use("/category", require("./category"));
 router.use("/product", require("./product"));
-router.use("/collection", require("./collection"));
 
 module.exports = router;

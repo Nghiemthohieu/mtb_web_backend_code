@@ -57,7 +57,7 @@ class ProductController {
     static productCollection = async (req, res) => {
         new SuccessResponse({
             message: "Get product collection success",
-            data: await ProductService.productCollection(req.query),
+            data: await ProductService.productCollection(req.query, req.params.slug),
         }).send(res);
     };
 }
