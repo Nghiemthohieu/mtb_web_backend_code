@@ -1,51 +1,25 @@
-'use strict';
-// models/ProductReview.js
+'use strict'
+
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
 
-const ManagerResponseSchema = new Schema({
-  manager_id: {
-    type: Schema.Types.ObjectId,
-    ref: 'Manager', // hoặc 'Manager' nếu bạn có collection riêng
-    required: true,
-  },
-  content: {
+// Định nghĩa schema
+const productSizeSchema = new mongoose.Schema({
+  size: {
     type: String,
     required: true,
+    unique: true,
+    trim: true,
   },
-  create_at: {
-    type: Date,
-    default: Date.now,
-  },
-}, { _id: false }); // Không cần _id riêng cho response
-
-const ProductReviewSchema = new Schema({
-  user_id: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-  },
-  user_name: {
-    type: String,
-    required: true,
-  },
-  rating: {
-    type: Number,
-    required: true,
-  },
-  comment: {
+  title: {
     type: String,
   },
-  images: [{
-    type: String, // URL hoặc đường dẫn ảnh
-  }],
-  response: {
-    type: ManagerResponseSchema,
-    default: null,
+  description: {
+    type: String,
   },
 }, {
-  collection: 'go_db_product_reviews',
-  timestamps: true, // vì bạn đã dùng create_at riêng
+  timestamps: true,              // Tự động thêm createdAt và updatedAt
+  collection: 'db_product_sizes'  // Tên collection trong MongoDB
 });
 
-module.exports = mongoose.model('ProductReview', ProductReviewSchema);
+// Export model
+module.exports = mongoose.model('ProductSize', productSizeSchema);
