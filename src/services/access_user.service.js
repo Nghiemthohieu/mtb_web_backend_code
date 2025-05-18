@@ -6,29 +6,30 @@ const crypto = require("crypto");
 const KeyTokenService = require("./KeyToken.service");
 const { createTokenPair, verifyJWT } = require("../auth/authUtils");
 const { getIntoData } = require("../utils")
-const {BadRequestError, conflictRequestError, ForbiddenError, authFailureError} = require("../core/error.response");
+const { BadRequestError, conflictRequestError, ForbiddenError, authFailureError } = require("../core/error.response");
 
-const {findByAccount} = require("./user.service");
+const { findByAccount } = require("./user.service");
 const logger = require("../utils/logger");
+const CartService = require("./cart.service");
 class AccessUserService {
 
     static handlerRefreshToken = async (refreshToken) => {
         const foundToken = await KeyTokenService.findbyRefreshTokenUsed(refreshToken);
-        if(foundToken) {
-            const {userId, account} = await verifyJWT(refreshToken, foundToken.privateKey);
+        if (foundToken) {
+            const { userId, account } = await verifyJWT(refreshToken, foundToken.privateKey);
             await KeyTokenService.deleteKeyById(userId);
             logger.error('Something wrng happend !! Pls relogin');
             throw new ForbiddenError('Something wrng happend !! Pls relogin');
         }
 
         const holderToken = await KeyTokenService.findbyRefreshToken(refreshToken);
-        if(!holderToken) {
+        if (!holderToken) {
             logger.error('user not registeted');
             throw new authFailureError('user not registeted');
         }
-        const {userId, account} = await verifyJWT(refreshToken, holderToken.privateKey);
-        const foundUser = await findByAccount({account});
-        if(!foundUser) {
+        const { userId, account } = await verifyJWT(refreshToken, holderToken.privateKey);
+        const foundUser = await findByAccount({ account });
+        if (!foundUser) {
             logger.error('user not registeted');
             throw new authFailureError('user not registeted');
         }
@@ -42,13 +43,13 @@ class AccessUserService {
                 refreshToken: tokens.refreshToken
             },
             $addToSet: {
-                refreshTokenUsed: refreshToken 
+                refreshTokenUsed: refreshToken
             }
         })
 
         return {
             data: {
-                user: {userId, account},
+                user: { userId, account },
                 tokens
             }
         }
@@ -61,21 +62,22 @@ class AccessUserService {
         }
     }
 
-    static login = async ({account, password, refreshToken}) => {
-        const FoundUser = await findByAccount({account});
-        if(!FoundUser) {
+    static login = async (req) => {
+        const { account, password} = req.body;
+        const FoundUser = await findByAccount({ account });
+        if (!FoundUser) {
             logger.error('Account khong ton tai');
             throw new BadRequestError('Account khong ton tai')
         }
         const isMatch = await bcrypt.compare(password, FoundUser.password);
-        if(!isMatch) {
+        if (!isMatch) {
             logger.error('Mat khau khong dung');
             throw new BadRequestError('Mat khau khong dung')
         }
 
         const privateKey = crypto.randomBytes(64).toString('hex');
         const publicKey = crypto.randomBytes(64).toString('hex');
-        const {_id: userId} = FoundUser;
+        const { _id: userId } = FoundUser;
         const tokens = await createTokenPair({
             userId,
             account
@@ -85,15 +87,21 @@ class AccessUserService {
             refreshToken: tokens.refreshToken,
             privateKey, publicKey,
         });
+
+        const sessionId = req.cookies.session_id;
+        if (sessionId) {
+            await CartService.mergeGuestCartToUser(userId, sessionId);
+        }
+
         return {
             data: {
-                user: getIntoData({fields: ['_id', 'name', 'account'], object: FoundUser}),
+                user: getIntoData({ fields: ['_id', 'name', 'account'], object: FoundUser }),
                 tokens
             }
         }
     }
 
-    static signUp = async ({name, account, password}) => {
+    static signUp = async ({ name, account, password }) => {
         try {
             //kiểm tra account là email hay sdt
             const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(account);
@@ -117,9 +125,9 @@ class AccessUserService {
                 account: account,
                 password: passwordHash,
                 roles: ['user']
-            }) 
+            })
 
-            if(newUser) {
+            if (newUser) {
                 const privateKey = crypto.randomBytes(64).toString('hex');
                 const publicKey = crypto.randomBytes(64).toString('hex');
 
@@ -129,7 +137,7 @@ class AccessUserService {
                     privateKey
                 })
 
-                if(!keyStore) {
+                if (!keyStore) {
                     logger.error('KeyStore Error!');
                     throw new BadRequestError('KeyStore Error!')
                 }
@@ -142,7 +150,7 @@ class AccessUserService {
                 return {
                     code: 201,
                     data: {
-                        user: getIntoData({fileds: ['_id', 'name', 'account'], object: newUser}),
+                        user: getIntoData({ fileds: ['_id', 'name', 'account'], object: newUser }),
                         tokens
                     }
                 }
@@ -152,7 +160,7 @@ class AccessUserService {
                 metadate: null
             }
 
-        } catch(err) {
+        } catch (err) {
             return {
                 code: 'xxx',
                 message: err.message,

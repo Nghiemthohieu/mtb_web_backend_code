@@ -9,36 +9,36 @@ const paginate = require("../utils/paginate");
 const { uploadFileToS3 } = require("../utils/uploadFileToS3");
 
 class CategoryService {
-    static CreateCategory = async(data) => {
-        if(data.img) {
+    static CreateCategory = async (data) => {
+        if (data.img) {
             let image = decodeBase64Image(data.img);
             data.img = await uploadFileToS3(image);
         }
-        return {data: await categoryModel.create(data)};
+        return { data: await categoryModel.create(data) };
     }
 
-    static GetByCategoryId = async(id) => {
-        return {data: await categoryModel.findById(id)};
+    static GetByCategoryId = async (id) => {
+        return { data: await categoryModel.findById(id) };
     }
 
-    static GetAllCategory = async(query) => {
-        return await paginate(categoryModel, {}, {page: query.page, limit: query.limit});
+    static GetAllCategory = async (query) => {
+        return await paginate(categoryModel, {}, { page: query.page, limit: query.limit });
     }
 
-    static UpdateCategory = async(data) => {
+    static UpdateCategory = async (data) => {
         if (!data._id) {
             logger.error('Vui lòng điển _id của category');
             throw new notFoundError('Vui lòng điển _id của category');
         }
-        if(data.img) {
+        if (data.img) {
             let image = decodeBase64Image(data.img);
             data.img = await uploadFileToS3(image);
-        }    
-        return {data: await categoryModel.findByIdAndUpdate(data._id, data, {new: true})};
+        }
+        return { data: await categoryModel.findByIdAndUpdate(data._id, data, { new: true }) };
     }
 
-    static DeleteCategory = async(id) => {
-        return {data: await categoryModel.findByIdAndDelete(id)};
+    static DeleteCategory = async (id) => {
+        return { data: await categoryModel.findByIdAndDelete(id) };
     }
 
     static GetHomeCategory = async (id) => {
@@ -75,22 +75,51 @@ class CategoryService {
         return { data: result[0]?.allChildren || [] };
     };
 
+    static getAllChildCategoryIds = async (slug) => {
+        if (!slug) {
+            throw new Error('Slug is required');
+        }
+
+        const categories = await categoryModel.aggregate([
+            { $match: { slug } },
+            {
+                $graphLookup: {
+                    from: 'db_categories',          // tên collection đúng
+                    startWith: '$_id',
+                    connectFromField: '_id',
+                    connectToField: 'parent_id', // đúng trường parent_id trong db
+                    as: 'descendants',
+                }
+            },
+            {
+                $project: {
+                    allIds: {
+                        $concatArrays: [['$_id'], '$descendants._id']
+                    }
+                }
+            }
+        ]);
+
+        const categoryIds = categories.length > 0 ? categories[0].allIds : [];
+        return categoryIds;
+    };
+
     static GetNavbarCategory = async () => {
         const roots = await categoryModel.aggregate([
             {
-            $match: {
-                is_navbar: true,
-                parent_id: null
-            }
+                $match: {
+                    is_navbar: true,
+                    parent_id: null
+                }
             },
             {
-            $graphLookup: {
-                from: 'db_categories',
-                startWith: '$_id',
-                connectFromField: '_id',
-                connectToField: 'parent_id',
-                as: 'allChildren'
-            }
+                $graphLookup: {
+                    from: 'db_categories',
+                    startWith: '$_id',
+                    connectFromField: '_id',
+                    connectToField: 'parent_id',
+                    as: 'allChildren'
+                }
             }
         ]);
 
@@ -111,12 +140,12 @@ class CategoryService {
 
         nodes.forEach(node => {
             if (node.parent_id) {
-            const parent = nodeMap.get(node.parent_id.toString());
-            if (parent) {
-                parent.children.push(node);
-            }
+                const parent = nodeMap.get(node.parent_id.toString());
+                if (parent) {
+                    parent.children.push(node);
+                }
             } else {
-            treeRoot = node; // gốc không có parent_id
+                treeRoot = node; // gốc không có parent_id
             }
         });
 

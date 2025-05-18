@@ -9,6 +9,9 @@ router.use("/product_materials", require("./product_materials"));
 router.use("/product_style", require("./product_style"));
 router.use("/category", require("./category"));
 router.use("/product", require("./product"));
-router.use("/collection", require("./collection"));
+router.use("/manager", require("./manager"));
+router.use("/product_review", require("./product_review"));
+router.use("/order", require("./order"));
+router.use("/code_discount", require("./codeDiscount"));
 
 module.exports = router;
