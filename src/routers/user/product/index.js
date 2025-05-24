@@ -8,5 +8,6 @@ const router = express.Router();
 
 // router.use(authentication);
 router.get('/list_style', asyncHandler(ProductController.getProductByStyle))
+router.get('/detail', asyncHandler(ProductController.GetProductBySlugAndColor))
 
 module.exports = router;

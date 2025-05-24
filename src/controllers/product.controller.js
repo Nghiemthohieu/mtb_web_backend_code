@@ -60,6 +60,15 @@ class ProductController {
             data: await ProductService.productCollection(req.query, req.params.slug),
         }).send(res);
     };
+
+    static GetProductBySlugAndColor = async (req, res) => {
+        new SuccessResponse({
+            message: "Get product by slug and color success",
+            data: await ProductService.GetProductBySlug(req.query.title, req.query.color),
+        }).send(res);
+    };
+
+
 }
 
 module.exports = ProductController;

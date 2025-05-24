@@ -2213,3 +2213,82 @@
 [2025-05-24 10:46:05] INFO: Request Log | path: /v1/api/category/list_home/nam | method: GET | status: 200 | duration: 73.81 ms
 [2025-05-24 10:46:18] INFO: Request Log | path: /v1/api/category/list_home/nu | method: GET | status: 200 | duration: 58.62 ms
 [2025-05-24 10:46:35] INFO: Request Log | path: /v1/api/category/list_home/nam | method: GET | status: 200 | duration: 54.17 ms
+[2025-05-24 11:13:56] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:13:57] INFO: Connect MongoDB Success
+[2025-05-24 11:14:01] INFO: Request Log | path: /v1/api/admin/product/create_img/68313884ec46d1b6b2f6749f | method: PATCH | status: 200 | duration: 1821.53 ms
+[2025-05-24 11:14:58] INFO: Request Log | path: /v1/api/admin/product/create_img/68313884ec46d1b6b2f6749f | method: PATCH | status: 200 | duration: 2082.84 ms
+[2025-05-24 11:17:55] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:17:56] INFO: Connect MongoDB Success
+[2025-05-24 11:19:34] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:19:35] INFO: Connect MongoDB Success
+[2025-05-24 11:19:36] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:19:38] INFO: Connect MongoDB Success
+[2025-05-24 11:20:10] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:20:11] INFO: Connect MongoDB Success
+[2025-05-24 11:20:12] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:20:13] INFO: Connect MongoDB Success
+[2025-05-24 11:20:48] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:20:49] INFO: Connect MongoDB Success
+[2025-05-24 11:20:53] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:20:53] INFO: Connect MongoDB Success
+[2025-05-24 11:21:16] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:21:18] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:21:20] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:21:20] INFO: Connect MongoDB Success
+[2025-05-24 11:21:23] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:21:24] INFO: Connect MongoDB Success
+[2025-05-24 11:21:26] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:21:27] INFO: Connect MongoDB Success
+[2025-05-24 11:21:28] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:21:29] INFO: Connect MongoDB Success
+[2025-05-24 11:23:03] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:23:04] INFO: Connect MongoDB Success
+[2025-05-24 11:23:13] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:23:15] INFO: Connect MongoDB Success
+[2025-05-24 11:25:19] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:25:20] INFO: Connect MongoDB Success
+[2025-05-24 11:25:36] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:25:37] INFO: Connect MongoDB Success
+[2025-05-24 11:25:40] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:25:40] INFO: Connect MongoDB Success
+[2025-05-24 11:25:46] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:25:47] INFO: Connect MongoDB Success
+[2025-05-24 11:26:24] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:26:25] INFO: Connect MongoDB Success
+[2025-05-24 11:26:40] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:26:41] INFO: Connect MongoDB Success
+[2025-05-24 11:26:44] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:26:45] INFO: Connect MongoDB Success
+[2025-05-24 11:26:47] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:26:48] INFO: Connect MongoDB Success
+[2025-05-24 11:27:54] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:27:55] INFO: Connect MongoDB Success
+[2025-05-24 11:28:04] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:28:05] INFO: Connect MongoDB Success
+[2025-05-24 11:28:09] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:28:10] INFO: Connect MongoDB Success
+[2025-05-24 11:28:54] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:28:55] INFO: Connect MongoDB Success
+[2025-05-24 11:29:00] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:29:01] INFO: Connect MongoDB Success
+[2025-05-24 11:29:10] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:29:11] INFO: Connect MongoDB Success
+[2025-05-24 11:29:17] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:29:18] INFO: Connect MongoDB Success
+[2025-05-24 11:29:38] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:29:39] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:29:40] INFO: Connect MongoDB Success
+[2025-05-24 11:30:11] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:30:12] INFO: Connect MongoDB Success
+[2025-05-24 11:30:16] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:30:17] INFO: Connect MongoDB Success
+[2025-05-24 11:30:19] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:30:20] INFO: Connect MongoDB Success
+[2025-05-24 11:31:08] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:31:09] INFO: Connect MongoDB Success
+[2025-05-24 11:31:20] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:31:21] INFO: Connect MongoDB Success
+[2025-05-24 11:31:29] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:31:30] INFO: Connect MongoDB Success
+[2025-05-24 11:31:56] INFO: AWS S3 Client khởi tạoc thành công
+[2025-05-24 11:31:57] INFO: Connect MongoDB Success

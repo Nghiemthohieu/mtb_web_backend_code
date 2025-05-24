@@ -22,8 +22,15 @@ class ProductService {
         return { data: await productModel.findById(id) };
     }
 
-    static GetProductBySlug = async (slug) => {
-        return { data: await productModel.findOne({ slug }) };
+    static GetProductBySlugAndColor = async (title, color) => {
+        return {
+            data: await productModel.findOne({
+                title,
+                product_variants: { $elemMatch: { color } },
+                product_images: { $elemMatch: { color } }
+            })
+                .lean()
+        };
     }
 
     static GetAllProduct = async (query) => {
