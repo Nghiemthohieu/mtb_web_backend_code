@@ -22,6 +22,10 @@ class ProductService {
         return { data: await productModel.findById(id) };
     }
 
+    static GetProductBySlug = async (slug) => {
+        return { data: await productModel.findOne({ slug }) };
+    }
+
     static GetAllProduct = async (query) => {
         return await paginate(productModel, {}, {
             page: query.page, limit: query.limit, populate: [

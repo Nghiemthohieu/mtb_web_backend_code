@@ -41,14 +41,19 @@ class CategoryService {
         return { data: await categoryModel.findByIdAndDelete(id) };
     }
 
-    static GetHomeCategory = async (id) => {
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            throw new Error('Invalid category id');
+    static GetHomeCategory = async (slug) => {
+        if (!slug || typeof slug !== 'string') {
+            throw new Error('Invalid category slug');
+        }
+
+        const category = await categoryModel.findOne({ slug });
+        if (!category) {
+            throw new Error('Category not found');
         }
 
         const result = await categoryModel.aggregate([
             {
-                $match: { _id: mongoose.Types.ObjectId.createFromHexString(id) }
+                $match: { _id: category._id }
             },
             {
                 $graphLookup: {

@@ -42,7 +42,7 @@ class CategoryController {
     static GetHomeCategory = async(req, res) => {
         return new SuccessResponse({
             message: 'Get Home Category success',
-            data: await CategoryService.GetHomeCategory(req.params.id)
+            data: await CategoryService.GetHomeCategory(req.params.slug)
         }).send(res);
     };
 

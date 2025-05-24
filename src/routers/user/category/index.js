@@ -7,7 +7,7 @@ const { authentication } = require('../../../auth/authUtils');
 const router = express.Router();
 
 // router.use(authentication);
-router.get('/list_home/:id', asyncHandler(CategoryController.GetHomeCategory))
+router.get('/list_home/:slug', asyncHandler(CategoryController.GetHomeCategory))
 router.get('/list_navbar', asyncHandler(CategoryController.GetNavbarCategory))
 
 module.exports = router;
